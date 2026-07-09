@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flight Price Tracker</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <h1>Flight Price Tracker</h1>
+          <p>HKG -> JFK direct one-way fares from Wing On Travel</p>
+        </div>
+        <a class="source-link" href="https://www.wingontravel.com/flight/" target="_blank" rel="noreferrer">Wing On</a>
+      </header>
+
+      <section class="summary-grid" aria-label="Current fare summary">
+        <article class="metric">
+          <span>Latest lowest fare</span>
+          <strong id="latestFare">--</strong>
+        </article>
+        <article class="metric">
+          <span>Best tracked fare</span>
+          <strong id="bestFare">--</strong>
+        </article>
+        <article class="metric">
+          <span>Last checked</span>
+          <strong id="lastChecked">--</strong>
+        </article>
+        <article class="metric">
+          <span>Tracked records</span>
+          <strong id="recordCount">--</strong>
+        </article>
+      </section>
+
+      <section class="layout">
+        <section class="panel chart-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Price History</h2>
+              <p>Hourly snapshots by outbound date</p>
+            </div>
+            <div id="legend" class="legend"></div>
+          </div>
+          <div class="chart-wrap">
+            <svg id="priceChart" role="img" aria-label="Flight price history chart"></svg>
+          </div>
+        </section>
+
+        <aside class="panel">
+          <div class="panel-heading compact">
+            <div>
+              <h2>Latest Flights</h2>
+              <p>Lowest direct option per date</p>
+            </div>
+          </div>
+          <div id="latestFlights" class="flight-list"></div>
+        </aside>
+      </section>
+
+      <section class="panel table-panel">
+        <div class="panel-heading compact">
+          <div>
+            <h2>Recent Checks</h2>
+            <p>Most recent price snapshots</p>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Checked</th>
+                <th>Date</th>
+                <th>Price</th>
+                <th>Airline</th>
+                <th>Flight</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody id="recentRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
