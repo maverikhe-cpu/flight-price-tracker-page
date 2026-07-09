@@ -16,6 +16,16 @@ const shortTime = (iso) => {
 
 const byCheckedAt = (a, b) => new Date(a.checked_at) - new Date(b.checked_at);
 
+function flightNumber(record) {
+  const flight = record.lowest_option?.flight || "";
+  const match = flight.match(/[A-Z]{2}\d+/);
+  return match ? match[0] : flight.trim();
+}
+
+function seriesKey(record) {
+  return flightNumber(record) || record.date || "Unknown flight";
+}
+
 function latestByDate(records) {
   const map = new Map();
   records.filter((record) => record.found_price).forEach((record) => map.set(record.date, record));
@@ -93,7 +103,7 @@ function renderLegend(series) {
       (item) => `
         <span class="legend-item">
           <span class="legend-swatch" style="background:${item.color}"></span>
-          ${item.date}
+          ${item.label}
         </span>
       `
     )
@@ -113,12 +123,13 @@ function renderChart(records) {
     .filter((record) => record.found_price && typeof record.lowest_price_hkd === "number")
     .sort(byCheckedAt)
     .forEach((record) => {
-      if (!groups.has(record.date)) groups.set(record.date, []);
-      groups.get(record.date).push(record);
+      const key = seriesKey(record);
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(record);
     });
 
-  const series = [...groups.entries()].map(([date, values], index) => ({
-    date,
+  const series = [...groups.entries()].map(([label, values], index) => ({
+    label,
     values,
     color: colors[index % colors.length],
   }));
@@ -163,7 +174,7 @@ function renderChart(records) {
         .map(
           (record) =>
             `<circle cx="${x(new Date(record.checked_at).getTime())}" cy="${y(record.lowest_price_hkd)}" r="4" fill="${item.color}">
-              <title>${item.date} ${money(record.lowest_price_hkd)} at ${shortTime(record.checked_at)}</title>
+              <title>${item.label} ${record.date} ${money(record.lowest_price_hkd)} at ${shortTime(record.checked_at)}</title>
             </circle>`
         )
         .join("");
