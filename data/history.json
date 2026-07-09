@@ -6,7 +6,7 @@
     "direct_only": true,
     "cabin": "economy"
   },
-  "updated_at": "2026-07-09T12:52:12.359489+00:00",
+  "updated_at": "2026-07-09T13:17:28.593406+00:00",
   "records": [
     {
       "checked_at": "2026-07-09T10:05:31.040379+00:00",
@@ -222,6 +222,34 @@
         "price_hkd": 15804
       },
       "message": "Found direct JFK flight prices.",
+      "url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-nyc?outbounddate=2026-08-23&adults=1&children=0&cabintype=tourist&fromairport&toairport=JFK&direct=true&airline&locale=en"
+    },
+    {
+      "checked_at": "2026-07-09T13:16:47.692364+00:00",
+      "date": "2026-08-22",
+      "found_price": true,
+      "lowest_price_hkd": 14427,
+      "calendar_price_hkd": 14427,
+      "lowest_option": {
+        "airline": "Cathay Pacific",
+        "flight": "CX844 359",
+        "depart_time": "02:00",
+        "arrive_time": "06:00",
+        "duration": "16h",
+        "transfer": "direct",
+        "price_hkd": 14427
+      },
+      "message": "Found direct JFK flight prices.",
+      "url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-nyc?outbounddate=2026-08-22&adults=1&children=0&cabintype=tourist&fromairport&toairport=JFK&direct=true&airline&locale=en"
+    },
+    {
+      "checked_at": "2026-07-09T13:17:28.533847+00:00",
+      "date": "2026-08-23",
+      "found_price": false,
+      "lowest_price_hkd": null,
+      "calendar_price_hkd": null,
+      "lowest_option": null,
+      "message": "No direct JFK flight price found in page text.",
       "url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-nyc?outbounddate=2026-08-23&adults=1&children=0&cabintype=tourist&fromairport&toairport=JFK&direct=true&airline&locale=en"
     }
   ]
