@@ -2,11 +2,12 @@
   "route": {
     "origin": "HKG",
     "destination": "JFK",
+    "transfer_deal_destination": "PHL",
     "trip_type": "oneway",
     "direct_only": true,
     "cabin": "economy"
   },
-  "updated_at": "2026-07-14T04:10:36.626503+00:00",
+  "updated_at": "2026-07-14T05:10:44.665795+00:00",
   "records": [
     {
       "checked_at": "2026-07-09T10:05:31.040379+00:00",
@@ -4239,6 +4240,54 @@
       },
       "message": "Found direct JFK flight prices.",
       "url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-nyc?outbounddate=2026-08-23&adults=1&children=0&cabintype=tourist&fromairport&toairport=JFK&direct=true&airline&locale=en"
+    },
+    {
+      "checked_at": "2026-07-14T05:10:34.985868+00:00",
+      "date": "2026-08-22",
+      "found_price": true,
+      "lowest_price_hkd": 9080,
+      "calendar_price_hkd": 9080,
+      "lowest_option": {
+        "airline": "Cathay Pacific",
+        "flight": "CX840 351",
+        "depart_time": "16:30",
+        "arrive_time": "20:35",
+        "duration": "16h5m",
+        "transfer": "direct",
+        "price_hkd": 9080,
+        "duration_minutes": 965
+      },
+      "found_transfer_deal": false,
+      "transfer_deal_price_hkd": null,
+      "transfer_deal_option": null,
+      "transfer_destination": "PHL",
+      "message": "Found direct JFK flight prices.",
+      "url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-nyc?outbounddate=2026-08-22&adults=1&children=0&cabintype=tourist&fromairport=&toairport=JFK&direct=true&airline=&locale=en",
+      "transfer_url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-phl?outbounddate=2026-08-22&adults=1&children=0&cabintype=tourist&fromairport=&toairport=PHL&direct=&airline=&locale=en"
+    },
+    {
+      "checked_at": "2026-07-14T05:10:44.602398+00:00",
+      "date": "2026-08-23",
+      "found_price": true,
+      "lowest_price_hkd": 9904,
+      "calendar_price_hkd": 9904,
+      "lowest_option": {
+        "airline": "Cathay Pacific",
+        "flight": "CX840 351",
+        "depart_time": "16:30",
+        "arrive_time": "20:35",
+        "duration": "16h5m",
+        "transfer": "direct",
+        "price_hkd": 9904,
+        "duration_minutes": 965
+      },
+      "found_transfer_deal": false,
+      "transfer_deal_price_hkd": null,
+      "transfer_deal_option": null,
+      "transfer_destination": "PHL",
+      "message": "Found direct JFK flight prices.",
+      "url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-nyc?outbounddate=2026-08-23&adults=1&children=0&cabintype=tourist&fromairport=&toairport=JFK&direct=true&airline=&locale=en",
+      "transfer_url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-phl?outbounddate=2026-08-23&adults=1&children=0&cabintype=tourist&fromairport=&toairport=PHL&direct=&airline=&locale=en"
     }
   ]
 }

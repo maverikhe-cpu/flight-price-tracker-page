@@ -16,14 +16,36 @@ const shortTime = (iso) => {
 
 const byCheckedAt = (a, b) => new Date(a.checked_at) - new Date(b.checked_at);
 
-function flightNumber(record) {
-  const flight = record.lowest_option?.flight || "";
+function flightNumberFromOption(option) {
+  const flight = option?.flight || "";
   const match = flight.match(/[A-Z]{2}\d+/);
   return match ? match[0] : flight.trim();
 }
 
-function seriesKey(record) {
-  return flightNumber(record) || record.date || "Unknown flight";
+function trackedPoints(records) {
+  return records.flatMap((record) => {
+    const points = [];
+    if (record.found_price && typeof record.lowest_price_hkd === "number") {
+      points.push({
+        record,
+        option: record.lowest_option || {},
+        price: record.lowest_price_hkd,
+        label: flightNumberFromOption(record.lowest_option) || record.date || "Direct",
+        kind: "Direct",
+      });
+    }
+    if (record.found_transfer_deal && typeof record.transfer_deal_price_hkd === "number") {
+      const destination = record.transfer_destination || "JFK";
+      points.push({
+        record,
+        option: record.transfer_deal_option || {},
+        price: record.transfer_deal_price_hkd,
+        label: `${flightNumberFromOption(record.transfer_deal_option) || record.date} HKG-${destination}`,
+        kind: `HKG-${destination} 1-stop deal`,
+      });
+    }
+    return points;
+  });
 }
 
 function latestByDate(records) {
@@ -37,12 +59,12 @@ function setText(id, text) {
 }
 
 function renderSummary(records, history) {
-  const priced = records.filter((record) => typeof record.lowest_price_hkd === "number");
+  const priced = trackedPoints(records);
   const latest = priced[priced.length - 1];
-  const best = priced.reduce((min, record) => (record.lowest_price_hkd < min.lowest_price_hkd ? record : min), priced[0]);
+  const best = priced.reduce((min, point) => (point.price < min.price ? point : min), priced[0]);
 
-  setText("latestFare", latest ? money(latest.lowest_price_hkd) : "--");
-  setText("bestFare", best ? money(best.lowest_price_hkd) : "--");
+  setText("latestFare", latest ? money(latest.price) : "--");
+  setText("bestFare", best ? money(best.price) : "--");
   setText("lastChecked", history.updated_at ? shortTime(history.updated_at) : "--");
   setText("recordCount", String(records.length));
 }
@@ -66,6 +88,13 @@ function renderLatestFlights(records) {
             <strong>${option.airline || "Unknown airline"}</strong><br />
             ${option.flight || "Unknown flight"} · ${option.depart_time || "--"} -> ${option.arrive_time || "--"}<br />
             ${option.duration || "--"} · ${shortTime(record.checked_at)}
+            ${
+              record.found_transfer_deal
+                ? `<br /><span class="deal-line">HKG-${record.transfer_destination || "JFK"} 1-stop deal: ${money(record.transfer_deal_price_hkd)} · ${
+                    record.transfer_deal_option?.flight || "Unknown flight"
+                  } · ${record.transfer_deal_option?.duration || "--"}</span>`
+                : ""
+            }
           </div>
         </article>
       `;
@@ -76,7 +105,7 @@ function renderLatestFlights(records) {
 function renderTable(records) {
   const body = document.getElementById("recentRows");
   const rows = records
-    .filter((record) => record.found_price)
+    .filter((record) => record.found_price || record.found_transfer_deal)
     .slice(-12)
     .reverse();
 
@@ -91,6 +120,7 @@ function renderTable(records) {
           <td>${option.airline || "--"}</td>
           <td>${option.flight || "--"}</td>
           <td>${option.depart_time || "--"} -> ${option.arrive_time || "--"}</td>
+          <td>${record.found_transfer_deal ? `HKG-${record.transfer_destination || "JFK"} · ${money(record.transfer_deal_price_hkd)} · ${record.transfer_deal_option?.flight || "--"}` : "--"}</td>
         </tr>
       `;
     })
@@ -119,13 +149,12 @@ function renderChart(records) {
   const innerH = height - margin.top - margin.bottom;
 
   const groups = new Map();
-  records
-    .filter((record) => record.found_price && typeof record.lowest_price_hkd === "number")
-    .sort(byCheckedAt)
-    .forEach((record) => {
-      const key = seriesKey(record);
+  trackedPoints(records)
+    .sort((a, b) => new Date(a.record.checked_at) - new Date(b.record.checked_at))
+    .forEach((point) => {
+      const key = point.label;
       if (!groups.has(key)) groups.set(key, []);
-      groups.get(key).push(record);
+      groups.get(key).push(point);
     });
 
   const series = [...groups.entries()].map(([label, values], index) => ({
@@ -141,8 +170,8 @@ function renderChart(records) {
     return;
   }
 
-  const times = all.map((record) => new Date(record.checked_at).getTime());
-  const prices = all.map((record) => record.lowest_price_hkd);
+  const times = all.map((point) => new Date(point.record.checked_at).getTime());
+  const prices = all.map((point) => point.price);
   const minT = Math.min(...times);
   const maxT = Math.max(...times);
   const minP = Math.floor(Math.min(...prices) / 500) * 500;
@@ -165,16 +194,16 @@ function renderChart(records) {
   const paths = series
     .map((item) => {
       const d = item.values
-        .map((record, index) => {
-          const point = `${x(new Date(record.checked_at).getTime())},${y(record.lowest_price_hkd)}`;
-          return `${index === 0 ? "M" : "L"}${point}`;
+        .map((point, index) => {
+          const coords = `${x(new Date(point.record.checked_at).getTime())},${y(point.price)}`;
+          return `${index === 0 ? "M" : "L"}${coords}`;
         })
         .join(" ");
       const dots = item.values
         .map(
-          (record) =>
-            `<circle cx="${x(new Date(record.checked_at).getTime())}" cy="${y(record.lowest_price_hkd)}" r="4" fill="${item.color}">
-              <title>${item.label} ${record.date} ${money(record.lowest_price_hkd)} at ${shortTime(record.checked_at)}</title>
+          (point) =>
+            `<circle cx="${x(new Date(point.record.checked_at).getTime())}" cy="${y(point.price)}" r="4" fill="${item.color}">
+              <title>${item.label} ${point.record.date} ${point.kind} ${money(point.price)} at ${shortTime(point.record.checked_at)}</title>
             </circle>`
         )
         .join("");

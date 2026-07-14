@@ -206,6 +206,11 @@ h1 {
   line-height: 1.55;
 }
 
+.deal-line {
+  color: var(--accent);
+  font-weight: 800;
+}
+
 .table-panel {
   margin-top: 14px;
 }
@@ -217,7 +222,7 @@ h1 {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 760px;
+  min-width: 880px;
 }
 
 th,
