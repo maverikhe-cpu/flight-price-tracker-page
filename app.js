@@ -75,7 +75,6 @@ function latestTransferOptions(records) {
       date: record.date,
       checked_at: record.checked_at,
       destination: record.transfer_destination || "PHL",
-      url: record.transfer_url || "",
       key: `${record.date}-${option.flight}-${option.duration}-${option.price_hkd}-${index}`,
       qualifies: optionQualifies(option),
     }))
@@ -90,6 +89,21 @@ function connectionDetails(value) {
 
 function setText(id, text) {
   document.getElementById(id).textContent = text;
+}
+
+function renderTransferSearchLinks() {
+  const container = document.getElementById("transferSearchLinks");
+  const records = latestRecordsByDate(state.records).filter((record) => record.transfer_url);
+  container.innerHTML = records
+    .map((record) => {
+      const label = new Intl.DateTimeFormat("en-HK", {
+        month: "short",
+        day: "numeric",
+        timeZone: "UTC",
+      }).format(new Date(`${record.date}T00:00:00Z`));
+      return `<a class="transfer-search-link" href="${escapeHtml(record.transfer_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)} on Wing On <span aria-hidden="true">↗</span></a>`;
+    })
+    .join("");
 }
 
 function renderSummary() {
@@ -169,11 +183,7 @@ function renderTransferRows() {
         <tr class="${option.qualifies ? "eligible-row" : "outside-row"}">
           <td><strong>${escapeHtml(option.date)}</strong></td>
           <td>
-            ${
-              option.url
-                ? `<a class="flight-combination flight-link" href="${escapeHtml(option.url)}" target="_blank" rel="noopener noreferrer" title="Open Wing On results for ${escapeHtml(option.date)}">${escapeHtml(flightNumber(option) || "Unknown flight")} <span aria-hidden="true">↗</span></a>`
-                : `<strong class="flight-combination">${escapeHtml(flightNumber(option) || "Unknown flight")}</strong>`
-            }
+            <strong class="flight-combination">${escapeHtml(flightNumber(option) || "Unknown flight")}</strong>
             <span class="cell-secondary">${escapeHtml(option.airline || "Unknown airline")}</span>
           </td>
           <td>
@@ -424,6 +434,7 @@ function renderTransferBoard() {
 
 function renderAll() {
   renderSummary();
+  renderTransferSearchLinks();
   renderTransferBoard();
   renderDirectChart();
   renderLatestDirect();

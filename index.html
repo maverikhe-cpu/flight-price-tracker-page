@@ -54,10 +54,13 @@
             <h2>One-stop options to Philadelphia</h2>
             <p id="transferOverview">Comparing current fare and total journey time</p>
           </div>
-          <div class="sort-controls" role="group" aria-label="Sort one-stop options">
-            <button type="button" data-sort="balance" aria-pressed="true">Best balance</button>
-            <button type="button" data-sort="price" aria-pressed="false">Lowest price</button>
-            <button type="button" data-sort="duration" aria-pressed="false">Shortest trip</button>
+          <div class="transfer-controls">
+            <div id="transferSearchLinks" class="transfer-search-links" aria-label="Wing On search results"></div>
+            <div class="sort-controls" role="group" aria-label="Sort one-stop options">
+              <button type="button" data-sort="balance" aria-pressed="true">Best balance</button>
+              <button type="button" data-sort="price" aria-pressed="false">Lowest price</button>
+              <button type="button" data-sort="duration" aria-pressed="false">Shortest trip</button>
+            </div>
           </div>
         </div>
 
@@ -149,6 +152,6 @@
       </section>
     </main>
 
-    <script src="./app.js?v=20260714-flight-links"></script>
+    <script src="./app.js?v=20260714-search-links"></script>
   </body>
 </html>

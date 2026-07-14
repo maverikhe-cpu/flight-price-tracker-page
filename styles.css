@@ -212,6 +212,39 @@ h1 {
   background: var(--surface-soft);
 }
 
+.transfer-controls {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.transfer-search-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.transfer-search-link {
+  color: var(--direct);
+  font-size: 12px;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.transfer-search-link:hover,
+.transfer-search-link:focus-visible {
+  color: var(--ink);
+}
+
+.transfer-search-link:focus-visible {
+  outline: 2px solid var(--direct);
+  outline-offset: 3px;
+}
+
 .sort-controls button {
   min-height: 36px;
   border: 0;
@@ -410,27 +443,6 @@ th[aria-sort="descending"] .column-sort {
   line-height: 1;
 }
 
-.flight-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--direct) 45%, transparent);
-  text-underline-offset: 3px;
-}
-
-.flight-link:hover,
-.flight-link:focus-visible {
-  color: var(--direct);
-  text-decoration-color: currentColor;
-}
-
-.flight-link:focus-visible {
-  outline: 2px solid var(--direct);
-  outline-offset: 3px;
-}
-
 tbody tr:last-child td {
   border-bottom: 0;
 }
@@ -594,8 +606,17 @@ tbody tr:last-child td {
     display: block;
   }
 
-  .sort-controls {
+  .transfer-controls {
+    align-items: flex-start;
     margin-top: 14px;
+  }
+
+  .transfer-search-links {
+    justify-content: flex-start;
+  }
+
+  .sort-controls {
+    margin-top: 0;
   }
 }
 
@@ -679,6 +700,10 @@ tbody tr:last-child td {
   .sort-controls {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .transfer-controls {
     width: 100%;
   }
 
