@@ -11,73 +11,130 @@
       <header class="topbar">
         <div>
           <h1>Flight Price Tracker</h1>
-          <p>HKG -> JFK direct fares and HKG -> PHL one-stop deals from Wing On Travel</p>
+          <p>Compare HKG-JFK direct fares with HKG-PHL one-stop options</p>
         </div>
         <a class="source-link" href="https://www.wingontravel.com/flight/" target="_blank" rel="noreferrer">Wing On</a>
       </header>
 
-      <section class="summary-grid" aria-label="Current fare summary">
-        <article class="metric">
-          <span>Latest lowest fare</span>
-          <strong id="latestFare">--</strong>
-        </article>
-        <article class="metric">
-          <span>Best tracked fare</span>
-          <strong id="bestFare">--</strong>
-        </article>
-        <article class="metric">
-          <span>Last checked</span>
-          <strong id="lastChecked">--</strong>
-        </article>
-        <article class="metric">
-          <span>Tracked records</span>
-          <strong id="recordCount">--</strong>
-        </article>
+      <section class="route-rail" aria-label="Tracked routes">
+        <div class="route-item direct-route">
+          <span class="route-type">Direct monitor</span>
+          <strong>HKG <span aria-hidden="true">-></span> JFK</strong>
+          <small>Aug 22 and Aug 23 · one way</small>
+        </div>
+        <div class="route-item transfer-route">
+          <span class="route-type">One-stop comparison</span>
+          <strong>HKG <span aria-hidden="true">-></span> PHL</strong>
+          <small>Below HKD 9,000 · alert at 24h or less</small>
+        </div>
       </section>
 
-      <section class="layout">
+      <section class="summary-strip" aria-label="Current fare summary">
+        <div class="metric">
+          <span>Lowest direct</span>
+          <strong id="directFare">--</strong>
+        </div>
+        <div class="metric">
+          <span>Lowest one-stop</span>
+          <strong id="transferFare">--</strong>
+        </div>
+        <div class="metric">
+          <span>Shortest one-stop</span>
+          <strong id="shortestTrip">--</strong>
+        </div>
+        <div class="metric">
+          <span>Last checked</span>
+          <strong id="lastChecked">--</strong>
+        </div>
+      </section>
+
+      <section class="panel transfer-panel">
+        <div class="section-heading transfer-heading">
+          <div>
+            <h2>One-stop options to Philadelphia</h2>
+            <p id="transferOverview">Comparing current fare and total journey time</p>
+          </div>
+          <div class="sort-controls" role="group" aria-label="Sort one-stop options">
+            <button type="button" data-sort="balance" aria-pressed="true">Best balance</button>
+            <button type="button" data-sort="price" aria-pressed="false">Lowest price</button>
+            <button type="button" data-sort="duration" aria-pressed="false">Shortest trip</button>
+          </div>
+        </div>
+
+        <div class="scatter-header">
+          <div>
+            <h3>Price and journey time</h3>
+            <p>Each point is a flight combination from the latest check.</p>
+          </div>
+          <div class="scatter-key" aria-label="Eligibility legend">
+            <span><i class="key-dot eligible"></i> Meets alert rule</span>
+            <span><i class="key-dot outside"></i> Over 24 hours</span>
+          </div>
+        </div>
+        <div class="scatter-wrap">
+          <svg id="transferScatter" role="img" aria-label="One-stop fare versus total journey time"></svg>
+        </div>
+
+        <div class="table-scroll transfer-table-scroll">
+          <table class="transfer-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Flight combination</th>
+                <th>Connection</th>
+                <th>Schedule</th>
+                <th>Total time</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="transferRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="direct-layout">
         <section class="panel chart-panel">
-          <div class="panel-heading">
+          <div class="section-heading">
             <div>
-              <h2>Price History</h2>
-              <p>Hourly snapshots grouped by flight number</p>
+              <h2>Direct fare history</h2>
+              <p>HKG-JFK hourly snapshots grouped by flight number</p>
             </div>
-            <div id="legend" class="legend"></div>
+            <div id="directLegend" class="legend"></div>
           </div>
           <div class="chart-wrap">
-            <svg id="priceChart" role="img" aria-label="Flight price history chart"></svg>
+            <svg id="directChart" role="img" aria-label="Direct flight price history chart"></svg>
           </div>
         </section>
 
-        <aside class="panel">
-          <div class="panel-heading compact">
+        <aside class="panel direct-latest-panel">
+          <div class="section-heading compact">
             <div>
-              <h2>Latest Flights</h2>
-              <p>Lowest direct option per date</p>
+              <h2>Latest direct flights</h2>
+              <p>Lowest option for each departure date</p>
             </div>
           </div>
-          <div id="latestFlights" class="flight-list"></div>
+          <div id="latestDirect" class="direct-list"></div>
         </aside>
       </section>
 
-      <section class="panel table-panel">
-        <div class="panel-heading compact">
+      <section class="panel recent-panel">
+        <div class="section-heading compact">
           <div>
-            <h2>Recent Checks</h2>
-            <p>Most recent price snapshots</p>
+            <h2>Recent checks</h2>
+            <p>Latest route snapshots and captured option counts</p>
           </div>
         </div>
         <div class="table-scroll">
-          <table>
+          <table class="recent-table">
             <thead>
               <tr>
                 <th>Checked</th>
                 <th>Date</th>
-                <th>Price</th>
-                <th>Airline</th>
-                <th>Flight</th>
-                <th>Time</th>
-                <th>HKG-PHL 1-stop deal</th>
+                <th>Direct flight</th>
+                <th>Direct fare</th>
+                <th>PHL options</th>
+                <th>Best eligible</th>
               </tr>
             </thead>
             <tbody id="recentRows"></tbody>
@@ -86,6 +143,6 @@
       </section>
     </main>
 
-    <script src="./app.js"></script>
+    <script src="./app.js?v=20260714-comparison"></script>
   </body>
 </html>
