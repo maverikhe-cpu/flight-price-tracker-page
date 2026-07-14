@@ -75,6 +75,7 @@ function latestTransferOptions(records) {
       date: record.date,
       checked_at: record.checked_at,
       destination: record.transfer_destination || "PHL",
+      url: record.transfer_url || "",
       key: `${record.date}-${option.flight}-${option.duration}-${option.price_hkd}-${index}`,
       qualifies: optionQualifies(option),
     }))
@@ -168,7 +169,11 @@ function renderTransferRows() {
         <tr class="${option.qualifies ? "eligible-row" : "outside-row"}">
           <td><strong>${escapeHtml(option.date)}</strong></td>
           <td>
-            <strong class="flight-combination">${escapeHtml(flightNumber(option) || "Unknown flight")}</strong>
+            ${
+              option.url
+                ? `<a class="flight-combination flight-link" href="${escapeHtml(option.url)}" target="_blank" rel="noopener noreferrer" title="Open Wing On results for ${escapeHtml(option.date)}">${escapeHtml(flightNumber(option) || "Unknown flight")} <span aria-hidden="true">↗</span></a>`
+                : `<strong class="flight-combination">${escapeHtml(flightNumber(option) || "Unknown flight")}</strong>`
+            }
             <span class="cell-secondary">${escapeHtml(option.airline || "Unknown airline")}</span>
           </td>
           <td>
