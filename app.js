@@ -375,20 +375,16 @@ function renderLatestDirect() {
 function renderRecentChecks() {
   const rows = state.records.slice(-10).reverse();
   document.getElementById("recentRows").innerHTML = rows
-    .map((record) => {
-      const options = optionsForRecord(record);
-      const eligible = options.filter(optionQualifies).sort((a, b) => a.price_hkd - b.price_hkd)[0];
-      return `
+    .map(
+      (record) => `
         <tr>
           <td>${shortTime(record.checked_at)}</td>
           <td>${escapeHtml(record.date)}</td>
           <td>${escapeHtml(flightNumber(record.lowest_option) || "--")}</td>
           <td class="direct-price">${money(record.lowest_price_hkd)}</td>
-          <td>${options.length}</td>
-          <td>${eligible ? `${money(eligible.price_hkd)} · ${escapeHtml(flightNumber(eligible))}` : "--"}</td>
         </tr>
-      `;
-    })
+      `
+    )
     .join("");
 }
 
