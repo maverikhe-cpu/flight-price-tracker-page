@@ -83,8 +83,16 @@
                 <th>Flight combination</th>
                 <th>Connection</th>
                 <th>Schedule</th>
-                <th>Total time</th>
-                <th>Price</th>
+                <th data-sort-heading="duration" aria-sort="none">
+                  <button class="column-sort" type="button" data-column-sort="duration" title="Sort by total time">
+                    Total time <span class="sort-arrow" aria-hidden="true">↕</span>
+                  </button>
+                </th>
+                <th data-sort-heading="price" aria-sort="none">
+                  <button class="column-sort" type="button" data-column-sort="price" title="Sort by price">
+                    Price <span class="sort-arrow" aria-hidden="true">↕</span>
+                  </button>
+                </th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -141,6 +149,6 @@
       </section>
     </main>
 
-    <script src="./app.js?v=20260714-direct-history"></script>
+    <script src="./app.js?v=20260714-column-sort"></script>
   </body>
 </html>

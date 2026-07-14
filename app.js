@@ -6,6 +6,7 @@ const state = {
   records: [],
   transferOptions: [],
   transferSort: "balance",
+  transferSortDirection: "asc",
 };
 
 const money = (value) =>
@@ -106,13 +107,18 @@ function renderSummary() {
   setText("lastChecked", state.history?.updated_at ? shortTime(state.history.updated_at) : "--");
 }
 
-function sortTransferOptions(options, mode) {
+function sortTransferOptions(options, mode, direction = "asc") {
   const result = [...options];
+  const order = direction === "desc" ? -1 : 1;
   if (mode === "price") {
-    return result.sort((a, b) => a.price_hkd - b.price_hkd || a.duration_minutes - b.duration_minutes);
+    return result.sort(
+      (a, b) => (a.price_hkd - b.price_hkd || a.duration_minutes - b.duration_minutes) * order
+    );
   }
   if (mode === "duration") {
-    return result.sort((a, b) => a.duration_minutes - b.duration_minutes || a.price_hkd - b.price_hkd);
+    return result.sort(
+      (a, b) => (a.duration_minutes - b.duration_minutes || a.price_hkd - b.price_hkd) * order
+    );
   }
 
   const prices = result.map((option) => option.price_hkd);
@@ -134,7 +140,11 @@ function sortTransferOptions(options, mode) {
 
 function renderTransferRows() {
   const body = document.getElementById("transferRows");
-  const options = sortTransferOptions(state.transferOptions, state.transferSort);
+  const options = sortTransferOptions(
+    state.transferOptions,
+    state.transferSort,
+    state.transferSortDirection
+  );
   const eligibleCount = options.filter((option) => option.qualifies).length;
   setText(
     "transferOverview",
@@ -220,7 +230,7 @@ function renderTransferScatter() {
 
   const labelKeys = new Set();
   const occupiedCoordinates = new Set();
-  for (const option of sortTransferOptions(options, state.transferSort)) {
+  for (const option of sortTransferOptions(options, state.transferSort, state.transferSortDirection)) {
     const coordinate = `${Math.round(option.duration_minutes / 10)}-${Math.round(option.price_hkd / 50)}`;
     if (!occupiedCoordinates.has(coordinate) && labelKeys.size < 4) {
       labelKeys.add(option.key);
@@ -392,7 +402,18 @@ function renderTransferBoard() {
   renderTransferRows();
   renderTransferScatter();
   document.querySelectorAll("[data-sort]").forEach((button) => {
-    button.setAttribute("aria-pressed", String(button.dataset.sort === state.transferSort));
+    const active =
+      button.dataset.sort === state.transferSort &&
+      (state.transferSort === "balance" || state.transferSortDirection === "asc");
+    button.setAttribute("aria-pressed", String(active));
+  });
+  document.querySelectorAll("[data-column-sort]").forEach((button) => {
+    const active = button.dataset.columnSort === state.transferSort;
+    const heading = button.closest("th");
+    const arrow = button.querySelector(".sort-arrow");
+    const direction = active ? state.transferSortDirection : null;
+    heading.setAttribute("aria-sort", direction === "asc" ? "ascending" : direction === "desc" ? "descending" : "none");
+    arrow.textContent = direction === "asc" ? "↑" : direction === "desc" ? "↓" : "↕";
   });
 }
 
@@ -408,6 +429,16 @@ function bindControls() {
   document.querySelectorAll("[data-sort]").forEach((button) => {
     button.addEventListener("click", () => {
       state.transferSort = button.dataset.sort;
+      state.transferSortDirection = "asc";
+      renderTransferBoard();
+    });
+  });
+  document.querySelectorAll("[data-column-sort]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const mode = button.dataset.columnSort;
+      state.transferSortDirection =
+        state.transferSort === mode && state.transferSortDirection === "asc" ? "desc" : "asc";
+      state.transferSort = mode;
       renderTransferBoard();
     });
   });

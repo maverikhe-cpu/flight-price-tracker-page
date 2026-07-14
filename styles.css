@@ -378,6 +378,38 @@ th {
   text-transform: uppercase;
 }
 
+.column-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+.column-sort:hover,
+.column-sort:focus-visible,
+th[aria-sort="ascending"] .column-sort,
+th[aria-sort="descending"] .column-sort {
+  color: var(--ink);
+}
+
+.column-sort:focus-visible {
+  outline: 2px solid var(--direct);
+  outline-offset: 4px;
+}
+
+.sort-arrow {
+  width: 12px;
+  color: var(--direct);
+  font-size: 13px;
+  line-height: 1;
+}
+
 tbody tr:last-child td {
   border-bottom: 0;
 }
