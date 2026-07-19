@@ -7,7 +7,7 @@
     "direct_only": true,
     "cabin": "economy"
   },
-  "updated_at": "2026-07-19T20:10:11.811958+00:00",
+  "updated_at": "2026-07-19T21:10:03.142229+00:00",
   "records": [
     {
       "checked_at": "2026-07-09T10:05:31.040379+00:00",
@@ -41331,6 +41331,267 @@
           "duration": "20h55m",
           "transfer": "transfer at Toronto for 4h8m",
           "price_hkd": 9955,
+          "duration_minutes": 1255
+        },
+        {
+          "airline": "United Airlines",
+          "flight": "UA862 77W + UA1298 7M9",
+          "depart_time": "11:45",
+          "arrive_time": "20:55",
+          "duration": "21h10m",
+          "transfer": "transfer at San Francisco for 2h35m",
+          "price_hkd": 10104,
+          "duration_minutes": 1270
+        },
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX884 77W + AA513 32Q",
+          "depart_time": "12:45",
+          "arrive_time": "23:48",
+          "duration": "23h3m",
+          "transfer": "transfer at Los Angeles for 4h15m",
+          "price_hkd": 7959,
+          "duration_minutes": 1383
+        },
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX882 77W + AA3276 32Q",
+          "depart_time": "18:25",
+          "arrive_time": "07:04",
+          "duration": "24h39m",
+          "transfer": "transfer at Los Angeles for 5h52m",
+          "price_hkd": 7959,
+          "duration_minutes": 1479
+        },
+        {
+          "airline": "Qatar Airways",
+          "flight": "QR815 77W + QR727 359",
+          "depart_time": "01:25",
+          "arrive_time": "14:30",
+          "duration": "25h5m",
+          "transfer": "transfer at Doha for 2h55m",
+          "price_hkd": 7894,
+          "duration_minutes": 1505
+        },
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX872 77W + AA2161 32Q",
+          "depart_time": "01:10",
+          "arrive_time": "14:33",
+          "duration": "25h23m",
+          "transfer": "transfer at San Francisco for 6h45m",
+          "price_hkd": 7959,
+          "duration_minutes": 1523
+        }
+      ],
+      "transfer_destination": "PHL",
+      "message": "Found direct JFK flight prices.",
+      "url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-nyc?outbounddate=2026-08-23&adults=1&children=0&cabintype=tourist&fromairport=&toairport=JFK&direct=true&airline=&locale=en",
+      "transfer_url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-phl?outbounddate=2026-08-23&adults=1&children=0&cabintype=tourist&fromairport=&toairport=PHL&direct=&airline=&locale=en"
+    },
+    {
+      "checked_at": "2026-07-19T21:09:53.817432+00:00",
+      "date": "2026-08-22",
+      "found_price": true,
+      "lowest_price_hkd": 15730,
+      "calendar_price_hkd": 15730,
+      "lowest_option": {
+        "airline": "Cathay Pacific",
+        "flight": "CX830 77W",
+        "depart_time": "09:05",
+        "arrive_time": "13:10",
+        "duration": "16h5m",
+        "transfer": "direct",
+        "price_hkd": 15730,
+        "duration_minutes": 965
+      },
+      "found_transfer_deal": false,
+      "transfer_deal_price_hkd": null,
+      "transfer_deal_option": null,
+      "transfer_options": [
+        {
+          "airline": "Cathay Pacific, Air Canada",
+          "flight": "CX820 351 + AC8512 CR9",
+          "depart_time": "02:50",
+          "arrive_time": "10:09",
+          "duration": "19h19m",
+          "transfer": "transfer at Toronto for 2h50m",
+          "price_hkd": 15741,
+          "duration_minutes": 1159
+        },
+        {
+          "airline": "Cathay Pacific, United Airlines",
+          "flight": "CX820 351 + UA8208 CR9",
+          "depart_time": "02:50",
+          "arrive_time": "10:09",
+          "duration": "19h19m",
+          "transfer": "transfer at Toronto for 2h50m",
+          "price_hkd": 27538,
+          "duration_minutes": 1159
+        },
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX852 359 + AA2870 321",
+          "depart_time": "13:25",
+          "arrive_time": "21:05",
+          "duration": "19h40m",
+          "transfer": "transfer at Seattle for 2h26m",
+          "price_hkd": 13845,
+          "duration_minutes": 1180
+        },
+        {
+          "airline": "Cathay Pacific",
+          "flight": "CX852 359 + CX7680 321",
+          "depart_time": "13:25",
+          "arrive_time": "21:05",
+          "duration": "19h40m",
+          "transfer": "transfer at Seattle for 2h26m",
+          "price_hkd": 14107,
+          "duration_minutes": 1180
+        },
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX806 351 + AA1848 319",
+          "depart_time": "12:10",
+          "arrive_time": "20:16",
+          "duration": "20h6m",
+          "transfer": "transfer at Chicago for 2h39m",
+          "price_hkd": 15165,
+          "duration_minutes": 1206
+        },
+        {
+          "airline": "Cathay Pacific",
+          "flight": "CX806 351 + CX7565 319",
+          "depart_time": "12:10",
+          "arrive_time": "20:16",
+          "duration": "20h6m",
+          "transfer": "transfer at Chicago for 2h39m",
+          "price_hkd": 15427,
+          "duration_minutes": 1206
+        },
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX882 77W + AA3276 32Q",
+          "depart_time": "18:25",
+          "arrive_time": "07:04",
+          "duration": "24h39m",
+          "transfer": "transfer at Los Angeles for 5h52m",
+          "price_hkd": 7959,
+          "duration_minutes": 1479
+        },
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX872 77W + AA2161 32Q",
+          "depart_time": "01:10",
+          "arrive_time": "14:33",
+          "duration": "25h23m",
+          "transfer": "transfer at San Francisco for 6h45m",
+          "price_hkd": 7959,
+          "duration_minutes": 1523
+        },
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX882 77W + AA2010 32Q",
+          "depart_time": "18:25",
+          "arrive_time": "08:08",
+          "duration": "25h43m",
+          "transfer": "transfer at Los Angeles for 6h56m",
+          "price_hkd": 7959,
+          "duration_minutes": 1543
+        },
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX880 77W + AA1451 32Q",
+          "depart_time": "00:05",
+          "arrive_time": "14:26",
+          "duration": "26h21m",
+          "transfer": "transfer at Los Angeles for 7h30m",
+          "price_hkd": 7959,
+          "duration_minutes": 1581
+        }
+      ],
+      "transfer_destination": "PHL",
+      "message": "Found direct JFK flight prices.",
+      "url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-nyc?outbounddate=2026-08-22&adults=1&children=0&cabintype=tourist&fromairport=&toairport=JFK&direct=true&airline=&locale=en",
+      "transfer_url": "https://www.wingontravel.com/flight/tickets-oneway-hkg-phl?outbounddate=2026-08-22&adults=1&children=0&cabintype=tourist&fromairport=&toairport=PHL&direct=&airline=&locale=en"
+    },
+    {
+      "checked_at": "2026-07-19T21:10:02.988572+00:00",
+      "date": "2026-08-23",
+      "found_price": true,
+      "lowest_price_hkd": 14230,
+      "calendar_price_hkd": 14230,
+      "lowest_option": {
+        "airline": "Cathay Pacific",
+        "flight": "CX830 77W",
+        "depart_time": "09:05",
+        "arrive_time": "13:10",
+        "duration": "16h5m",
+        "transfer": "direct",
+        "price_hkd": 14230,
+        "duration_minutes": 965
+      },
+      "found_transfer_deal": true,
+      "transfer_deal_price_hkd": 7959,
+      "transfer_deal_option": {
+        "airline": "Cathay Pacific, American Airlines",
+        "flight": "CX884 77W + AA513 32Q",
+        "depart_time": "12:45",
+        "arrive_time": "23:48",
+        "duration": "23h3m",
+        "transfer": "transfer at Los Angeles for 4h15m",
+        "price_hkd": 7959,
+        "duration_minutes": 1383
+      },
+      "transfer_options": [
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX806 351 + AA1848 319",
+          "depart_time": "12:10",
+          "arrive_time": "20:22",
+          "duration": "20h12m",
+          "transfer": "transfer at Chicago for 2h45m",
+          "price_hkd": 16684,
+          "duration_minutes": 1212
+        },
+        {
+          "airline": "Cathay Pacific",
+          "flight": "CX806 351 + CX7565 319",
+          "depart_time": "12:10",
+          "arrive_time": "20:22",
+          "duration": "20h12m",
+          "transfer": "transfer at Chicago for 2h45m",
+          "price_hkd": 16943,
+          "duration_minutes": 1212
+        },
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX876 351 + AA2542 321",
+          "depart_time": "16:05",
+          "arrive_time": "00:19",
+          "duration": "20h14m",
+          "transfer": "transfer at Dallas for 1h33m",
+          "price_hkd": 12719,
+          "duration_minutes": 1214
+        },
+        {
+          "airline": "Cathay Pacific",
+          "flight": "CX876 351 + CX7667 321",
+          "depart_time": "16:05",
+          "arrive_time": "00:19",
+          "duration": "20h14m",
+          "transfer": "transfer at Dallas for 1h33m",
+          "price_hkd": 12978,
+          "duration_minutes": 1214
+        },
+        {
+          "airline": "Cathay Pacific, American Airlines",
+          "flight": "CX828 351 + AA4632 E75",
+          "depart_time": "11:00",
+          "arrive_time": "19:55",
+          "duration": "20h55m",
+          "transfer": "transfer at Toronto for 4h8m",
+          "price_hkd": 10827,
           "duration_minutes": 1255
         },
         {
